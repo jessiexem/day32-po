@@ -17,7 +17,7 @@ export class PoComponent implements OnInit, OnChanges {
   onNewOrder= new Subject<Order>()
 
   
-  _order!: Order //not sure what this does
+  _order!: Order //for the discard alert
   poForm!: FormGroup
   poItemArrayCtrl!: FormArray
 
@@ -49,6 +49,9 @@ export class PoComponent implements OnInit, OnChanges {
     const order = this.poForm.value as Order
     if (!!this.order?.orderId) { //!! converts any value to a boolean
       order.orderId = this.order.orderId
+
+      //@ts-ignore
+      this.order = null //sets the order to null to clear the orderId
     }
 
     this.onNewOrder.next(order) //goes to saveOrder in app.component

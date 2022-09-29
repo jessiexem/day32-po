@@ -1,0 +1,15 @@
+<table class="box-it">
+    <thead>
+        <tr>
+            <th>Order Id</th>
+            <th>Name</th>
+        </tr>
+        <tr *ngFor="let o of ordersDB | keyvalue;">
+            <td>{{ o.key }}</td>
+            <td>{{ o.value.name}}</td>
+            <td>
+                <button type="button" (click)="edit(o.key)">Edit</button>
+            </td>
+        </tr>
+    </thead>
+</table>

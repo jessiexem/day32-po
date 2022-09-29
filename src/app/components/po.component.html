@@ -1,0 +1,50 @@
+<h2>Order</h2>
+
+<div class="box-it">
+    <form [formGroup]="poForm" (ngSubmit)="processOrder()">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" size="30" placeholder="Your name" formControlName="name">
+        </div>
+        <div>
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" size="30" placeholder="98765432" formControlName="mobile">
+        </div>
+
+        <div>
+            <button type="submit" style="margin-right: 10px" [disabled]="poForm.invalid">Save</button>
+            <ng-content></ng-content>
+            <button type="button" style="margin-right: 10px" (click)="addPoItem()">Add</button>
+        </div>
+
+        <div style="margin-top: 15px;" *ngIf="poItemArrayCtrl.controls.length > 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="lineItems">
+                    <tr *ngFor="let p of poItemArrayCtrl.controls; let i in index" [formGroup]="p">
+                        <td>
+                            <input type="text" value="apple" formControlName="item">
+                        </td>
+                        <td>
+                            <select formControlName="quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" (click)="removePoItem(i)">X</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
